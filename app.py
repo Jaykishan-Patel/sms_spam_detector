@@ -1,3 +1,4 @@
+
 import nltk
 import streamlit as st
 import pickle
@@ -5,9 +6,13 @@ import string
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 
+for pkg in ["punkt", "stopwords", "punkt_tab"]:
+    try:
+        nltk.data.find(f"tokenizers/{pkg}")
+    except:
+        nltk.download(pkg)
+
 ps = PorterStemmer()
-
-
 # Text Transform Function
 def transform(text):
     text = text.lower()
@@ -63,3 +68,4 @@ if st.button("Predict"):
             st.balloons()
         else:
             st.error("🚨 The message is **SPAM**")
+
